@@ -1,0 +1,18 @@
+DELIMITER //
+CREATE PROCEDURE delete_user(IN user_id INT(11))
+
+BEGIN
+	START TRANSACTION;
+
+	DELETE FROM messages WHERE user_id = user_id;
+	DELETE FROM likes WHERE user_id = user_id;
+	DELETE FROM media WHERE user_id = user_id;
+	DELETE FROM users WHERE id = user_id;
+	
+	COMMIT;
+
+	SELECT user_id;
+END //
+DELIMITER;
+
+CALL delete_user(1);
